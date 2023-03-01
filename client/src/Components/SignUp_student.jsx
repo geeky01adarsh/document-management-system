@@ -1,90 +1,115 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
+import { Button } from "@chakra-ui/react";
+import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
+import { VStack } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
+import { useState } from "react";
 
-const Login = () => {
-  const [inpval, setInpval] = useState({
-    email: "",
-    password: "",
-  });
+const Signup = () => {
+  const [show, setShow] = useState(false);
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmpassword, setConfirmpassword] = useState();
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
+
+  const handleClick = () => setShow(!show);
+
+  // for submit data in database >>>>>>>>>>>>>>>>>>>>>>>>>>
+  const submitHandler = async () => {
+    if (!name || !email || !password || !confirmpassword) {
+      toast({
+        title: "Please Fill all the required Fields",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
+    if (password !== confirmpassword) {
+      toast({
+        title: "Password and ConfirmPassword should be Same",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      toast({
+        title: "Registration is Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    } catch (error) {
+      toast({
+        title: "Error Occured",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center">
-      <div className="max-w-md w-full mx-auto">
-        <div className="text-center font-medium text-xl">Sign Up</div>
-        {/* <div className="text-3xl font-bold text-gray-900 mt-2 text-center">
-          anothertext
-        </div> */}
-      </div>
-      <div className="max-w-md w-full mx-auto mt-4 bg-white p-8 border border-gray-300">
-        <form action="" className="space-y-6">
-          <div>
-            <label className="text-sm font-bold text-gray-600 block">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              className="w-full p-2 border border-gray-300 rounded-mt-1"
-            />
-          </div>
-          <div>
-            <label className="text-sm font-bold text-gray-600 block">
-              Email
-            </label>
-            <input
-              type="text"
-              name="email"
-              className="w-full p-2 border border-gray-300 rounded-mt-1"
-            />
-          </div>
-          <div>
-            <label className=" text-sm font-bold text-gray-600 block">
-              Password
-            </label>
-            <input
-              required={true}
-              type="password"
-              name="password"
-              className="w-full p-2 border border-gray-300 rounded-mt-1"
-            />
-          </div>
-          <div>
-            <label className=" text-sm font-bold text-gray-600 block">
-              Confirm Password
-            </label>
-            <input
-              required={true}
-              type="password"
-              name="confirmpassword"
-              className="w-full p-2 border border-gray-300 rounded-mt-1"
-            />
-          </div>
+    <VStack spacing="5px">
+      <FormControl id="first-name" isRequired>
+        <FormLabel>Name</FormLabel>
+        <Input placeholder="Enter Your Name" />
+      </FormControl>
+      <FormControl id="email" isRequired>
+        <FormLabel>Email Address</FormLabel>
+        <Input type="email" placeholder="Enter Your Email Address" />
+      </FormControl>
+      <FormControl id="password" isRequired>
+        <FormLabel>Password</FormLabel>
+        <InputGroup size="md">
+          <Input
+            type={show ? "text" : "password"}
+            placeholder="Enter Password"
+          />
+        </InputGroup>
+      </FormControl>
+      <FormControl id="password" isRequired>
+        <FormLabel>Confirm Password</FormLabel>
+        <InputGroup size="md">
+          <Input
+            type={show ? "text" : "password"}
+            placeholder="Confirm password"
+          />
+        </InputGroup>
+      </FormControl>
 
-          <div className="flex items-center justify-between">
-            <div className=" flex items-center">
-              <input
-                type="checkbox"
-                className="h-4 w-4 text-blue-300 rounded"
-              />
-              <label className="ml-2 text-sm text-gray-500">Remember me</label>
-            </div>
-            <div>
-              <a href="" className="font-medium text-blue-500 text-sm">
-                {" "}
-                Forgot Password
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <button className="w-full py-2 px-4 bg-blue-600 text-white hover:bg-blue-800 rounded-md text-sm">
-              Login
-            </button>
-          </div>
-        </form>
+      <Button
+        colorScheme="blue"
+        onClick={submitHandler}
+        width="100%"
+        style={{ marginTop: 15 }}
+      >
+        Sign Up
+      </Button>
+      <div>
+        <a href="" className="font-medium text-blue-500 text-sm">
+          {" "}
+          Already have an Account? <> </>
+          <a className="text-black">Login Here</a>
+        </a>
       </div>
-    </div>
+    </VStack>
   );
 };
 
-export default Login;
+export default Signup;
