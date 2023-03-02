@@ -4,7 +4,7 @@ import { StudentLogin, studentSignout, StudentSignUp } from "../controllers/stud
 const studentAuthRouter = Router();
 
 studentAuthRouter.post("/signup", StudentSignUp);
-studentAuthRouter.post("/login", StudentLogin);
+studentAuthRouter.post("/signin", StudentLogin);
 studentAuthRouter.get('/signout', studentSignout);
 
 export default studentAuthRouter
