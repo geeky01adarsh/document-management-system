@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
   res.send("Hi there");
 });
 app.use("/auth/student", studentAuthRouter);
-app.use("/staffs", staffRouter);
+app.use("/staff", staffRouter);
 
 // hosting app
 mongoose
