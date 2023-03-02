@@ -50,9 +50,9 @@ const App = () => {
       </ThemeProvider> */}
 
       {/* <Login /> */}
-      {/* <RegistrationPage /> */}
+      <RegistrationPage />
       {/* <StudentDashboard /> */}
-      <Home />
+      {/* <Home /> */}
     </>
   );
 };

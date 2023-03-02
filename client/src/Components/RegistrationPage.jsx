@@ -1,86 +1,94 @@
 import React, { useState } from "react";
-import classNames from "classnames";
+import "../App.css";
 
-const RegisterForm = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const toggleForm = () => setIsLogin(!isLogin);
+const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userType, setUserType] = useState("user");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission here
+  };
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="w-full max-w-md">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-medium">
-              {isLogin ? "Log in" : "Register"}
-            </h1>
-            <button
-              className="text-sm font-medium text-blue-500 hover:text-blue-600 focus:outline-none"
-              onClick={toggleForm}
-            >
-              {isLogin ? "Create an account" : "Log in"}
-            </button>
-          </div>
-          <form className="mt-6">
-            {!isLogin && (
-              <div className="mb-4">
-                <label
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                  htmlFor="name"
-                >
-                  Name
-                </label>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+        <h2 className=" flex justify-center text-3xl font-bold mb-4">
+          Register
+        </h2>
+        <br></br>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Register as:
+            </label>
+            <div className="flex items-center">
+              <label className="mr-4">
                 <input
-                  className="w-full px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
-                  id="name"
-                  type="text"
-                  placeholder="John Doe"
+                  type="radio"
+                  value="user"
+                  checked={userType === "user"}
+                  onChange={(e) => setUserType(e.target.value)}
                 />
-              </div>
-            )}
-            <div className="mb-4">
-              <label
-                className="block mb-2 text-sm font-medium text-gray-700"
-                htmlFor="email"
-              >
-                Email
+                <span className="ml-2">User</span>
               </label>
-              <input
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="email"
-                type="email"
-                placeholder="john.doe@example.com"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block mb-2 text-sm font-medium text-gray-700"
-                htmlFor="password"
-              >
-                Password
+              <label>
+                <input
+                  type="radio"
+                  value="faculty"
+                  checked={userType === "faculty"}
+                  onChange={(e) => setUserType(e.target.value)}
+                />
+                <span className="ml-2">Faculty</span>
               </label>
-              <input
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="password"
-                type="password"
-                placeholder="********"
-              />
             </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">Name</label>
+            <input
+              className="border rounded-lg py-2 px-3 w-full"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">Email</label>
+            <input
+              className="border rounded-lg py-2 px-3 w-full"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Password
+            </label>
+            <input
+              className="border rounded-lg py-2 px-3 w-full"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="flex justify-center">
             <button
-              className={classNames(
-                "w-full px-4 py-2 text-white rounded focus:outline-none",
-                isLogin
-                  ? "bg-blue-500 hover:bg-blue-600"
-                  : "bg-green-500 hover:bg-green-600"
-              )}
+              className="flex justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded "
               type="submit"
             >
-              {isLogin ? "Log in" : "Register"}
+              Register
             </button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 
-export default RegisterForm;
+export default Register;
