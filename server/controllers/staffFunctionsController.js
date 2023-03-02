@@ -19,12 +19,12 @@ export const staffSignUp = async (req, res) => {
     if (!validateEmail(email))
       return res
         .status(203)
-              .json({ message: "Please provide a proper email address" });
+              .json({ err: "Please provide a proper email address" });
       console.log(secretkey, SECRET_KEY)
     if (secretkey !== SECRET_KEY) {
       return res
         .status(403)
-        .json({ message: "Forbidden!!! You are not a valid user!!! err:SECRET_KEY" });
+        .json({ err: "Forbidden!!! You are not a valid user!!! err:SECRET_KEY" });
     }
 
     if (!email.includes("@")) {
@@ -34,17 +34,17 @@ export const staffSignUp = async (req, res) => {
     if (domain_name !== DOMAIN_ADDRESS) {
       return res
         .status(403)
-        .json({ message: "Forbidden!!! You are not a valid user err:EMAIL_ID" });
+        .json({ err: "Forbidden!!! You are not a valid user err:EMAIL_ID" });
     }
 
     if (!validateName(name)) {
-      return res.status(403).json({ message: "Not a valid name" });
+      return res.status(403).json({ err: "Not a valid name" });
     }
     if (!validatePassword(password)) {
-      return res.status(403).json({ message: "Not a valid password" });
+      return res.status(403).json({ err: "Not a valid password" });
     }
     if (institute !== "IIST" && institute !== "IIP" && institute !== "IIMR")
-      return res.status(403).json({ message: "Not a valid Institute" });
+      return res.status(403).json({ err: "Not a valid Institute" });
 
     const hashedPass = await bcrypt.hash(password, 10);
 
@@ -61,13 +61,13 @@ export const staffSignUp = async (req, res) => {
       return res.status(201).json({ message: "new staff creation successful" });
     } catch (err) {
       console.error("Error in creating new staff:", err);
-      return res.status(500).json({ message: "Internal server error" });
+      return res.status(500).json({ err: "Internal server error" });
     }
   } catch (err) {
     console.error("Error occurred in creating a staff data:", err);
     return res
       .status(500)
-      .json({ message: "Something went wrong while creating the user staff" });
+      .json({ err: "Something went wrong while creating the user staff" });
   }
 };
 
