@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
-const studentSchema = new mongoose.Schema({
+const staffSchema = new mongoose.Schema({
   name: {
-    type: String,
-    required: true,
-  },
-  password: {
     type: String,
     required: true,
   },
@@ -14,19 +10,19 @@ const studentSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
   institute: {
     type: String,
     required: true,
-    default: "IIST",
   },
-  enrolmentNo: {
-    type: String,
-  },
-  admissionNo: {
+  department: {
     type: String,
   },
 });
 
-const Student = mongoose.model("Student", studentSchema);
+const Staff = mongoose.model("Staff", staffSchema);
 
-export default Student;
+export default Staff;

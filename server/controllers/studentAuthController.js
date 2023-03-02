@@ -6,26 +6,31 @@ import {
   validatePassword,
 } from "../utils/validators.js";
 import bcrypt from "bcrypt";
+import * as dotenv from 'dotenv';
+import jwt from 'jsonwebtoken'
+dotenv.config();
+
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 export const StudentSignUp = async (req, res) => {
   try {
     const { name, email, password, institute } = req.body;
 
     if (!validateEmail(email))
-      return res.status(203).json({ message: "Wrong email id provided" });
+      return res.status(203).json({ err: "Wrong email id provided" });
     let existingUser = await Student.findOne({ email });
     if (existingUser)
       return res
         .status(203)
-        .json({ message: "User already exists! Please sign in!!!" });
+        .json({ err: "User already exists! Please sign in!!!" });
     if (!validateName(name))
       return res
         .status(203)
-        .json({ message: "Please provide name in exprected format" });
+        .json({ err: "Please provide name in expected format" });
     if (!validatePassword(password))
       return res
         .status(203)
-              .json({ message: "Please provide name in exprected format" });
+              .json({ err: "Please provide password in expected format" });
       
       if (!validateInstitute(institute))
           return res
@@ -39,12 +44,12 @@ export const StudentSignUp = async (req, res) => {
       await newStudent.save();
     } catch (err) {
         console.error("New user is having problems", err);
-      return res.status(500).json({ message: "Internal server error" });
+      return res.status(500).json({ err: "Internal server error" });
         
     }
   } catch (e) {
       console.error("We ran into an error at student signup", e);
-      return res.status(500).json({message:"Internal server error"})
+      return res.status(500).json({err:"Internal server error"})
   }
 };
 
@@ -53,34 +58,50 @@ export const StudentLogin = async (req, res) => {
         const { email, password } = req.body;
 
         if (!validateEmail(email))
-          return res.status(203).json({ message: "Wrong email id provided" });
+          return res.status(203).json({ err: "Wrong email id provided" });
         let existingUser = await Student.findOne({ email });
         
         if (!existingUser)
           return res
             .status(203)
-            .json({ message: "User doesn't exists! Please create a account!!!" });
+            .json({ err: "User doesn't exists! Please create a account!!!" });
         if (!validatePassword(password))
           return res
             .status(203)
-                .json({ message: "Please provide name in exprected format" });
+                .json({ err: "Please provide name in exprected format" });
         
         const passMatch = await bcrypt.compare(
           password,
           existingUser.password
         );
 
-        if (passMatch) {
-          return res.status(200).json({messgae:"Successfully logged in"});
-          
-        } else {
-          return res.status(400).json({messgae:"Please cross check the version"})
-        }
+        if (!passMatch) {
+            return res.status(400).json({err:"Please cross check the version"})
+        } 
+
+        const token = jwt.sign({user:{id:existingUser._id}}, JWT_SECRET_KEY, { expiresIn: "45s" });
+        res.cookie('student', token, {
+          expire: new Date(Date.now() + 1000 * 45),
+        });
+
+        return res
+          .status(200)
+          .json({ message: "Succefully logged in", user: existingUser, token });
         
 
     } catch(err) {
         console.error("We ran into an error at student login", err);
-      return res.status(500).json({ message: "Internal server error" });
+      return res.status(500).json({ err: "Internal server error" });
         
+    }
+}
+
+export const studentSignout = async (req, res) => {
+    try {
+        res.clearCookie('student');
+        return res.status(200).json({ message: "Cookies cleared" });
+    } catch (error) {
+        console.error("Error while signing out:", error);
+        res.status(500).json({err:"Unable to clear cookies"})
     }
 }
