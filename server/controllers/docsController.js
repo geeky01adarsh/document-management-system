@@ -1,13 +1,25 @@
-import upload from "../utils/fileUpload.js";
+// import upload from "../utils/fileUpload.js";
+import { upload } from "../utils/temp_docs.js";
 
 
 export const studentDocsUpload = async (req, res) => {
   try {
-    const student = req.student;
-    if (!student) {
-      return res.status(400).json({ err: "Something went wrong" });
-    }
-    console.log(req.file);
+    // const student = req.student;
+    // if (!student) {
+    //   return res.status(400).json({ err: "Something went wrong" });
+    // }
+
+
+    upload(req, res, (err) => {
+      if (err) {
+        console.error(err);
+        res.status(400).send(err);
+      } else {
+        console.log(req.file);
+        return res.status(202).json({ msg:"File uploaded successfully!"});
+      }
+    });
+    // console.log(req.file);
     // upload(
     //   (req,
     //   res,

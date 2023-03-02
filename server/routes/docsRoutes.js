@@ -7,8 +7,8 @@ const docsRouter = Router();
 
 docsRouter.post(
   "/student/upload",
-  isAuthenticatedStudent,
-  upload.single("file"),
+ /* isAuthenticatedStudent,
+  upload.single("file"),*/
   studentDocsUpload
 );
 
