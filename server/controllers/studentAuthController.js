@@ -80,12 +80,8 @@ export const StudentLogin = async (req, res) => {
         } 
 
         const token = jwt.sign({user:{id:existingUser._id}}, JWT_SECRET_KEY, { expiresIn: "45s" });
-        console.log(token);
-        res.cookie('user', token, {
-          path: "/",
-          expires: new Date(Date.now() + 1000 * 45),
-          httpOnly: true,
-          sameSite: "lax",
+        res.cookie('student', token, {
+          expire: new Date(Date.now() + 1000 * 45),
         });
 
         return res
@@ -102,7 +98,7 @@ export const StudentLogin = async (req, res) => {
 
 export const studentSignout = async (req, res) => {
     try {
-        res.clearCookie('user');
+        res.clearCookie('student');
         return res.status(200).json({ message: "Cookies cleared" });
     } catch (error) {
         console.error("Error while signing out:", error);

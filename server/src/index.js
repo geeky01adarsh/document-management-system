@@ -4,20 +4,27 @@ import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import morgan from 'morgan';
+import multer from 'multer';
 import * as dotenv from "dotenv";
 
 // importing other functions
 import studentAuthRouter from "../routes/studentAuthRouter.js";
 import staffRouter from "../routes/staffRoutes.js";
+import docsRouter from "../routes/docsRoutes.js";
 
 // initializing app
 const app = express();
 
 // middlewares
 dotenv.config();
-app.use(cors({ credentials: true}));
+// app.use(cors({ credentials: true}));
 app.use(cookieParser());
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+// app.use(multer().any())
+app.use(express.json());
+app.use(morgan("dev"));
+express.static("Content");
 app.use(bodyParser.urlencoded({ extended: true }));
 const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.port || 5000;
@@ -28,6 +35,8 @@ app.get("/", (req, res) => {
 });
 app.use("/auth/student", studentAuthRouter);
 app.use("/staff", staffRouter);
+app.use('/docs', docsRouter);
+app.use(express.static('Content'));
 
 // hosting app
 mongoose

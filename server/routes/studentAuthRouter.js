@@ -5,6 +5,6 @@ const studentAuthRouter = Router();
 
 studentAuthRouter.post("/signup", StudentSignUp);
 studentAuthRouter.post("/login", StudentLogin);
-studentAuthRouter.post('/signout', studentSignout);
+studentAuthRouter.get('/signout', studentSignout);
 
 export default studentAuthRouter
