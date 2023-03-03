@@ -16,7 +16,7 @@ const studentSchema = new mongoose.Schema({
   },
   mobNo: {
     type: String,
-    required:true,
+    required: true,
   },
   institute: {
     type: String,
@@ -29,10 +29,13 @@ const studentSchema = new mongoose.Schema({
   admissionNo: {
     type: String,
   },
-  documents: [{
-    name: String,
-    path: String,
-  }]
+  documents: [
+    {
+      name: String,
+      value: String,
+      path: String,
+    },
+  ],
 });
 
 const Student = mongoose.model("Student", studentSchema);
