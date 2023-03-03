@@ -1,5 +1,0 @@
-PORT = 5000
-CONNECTION_URL = mongodb+srv://admin:j33QZK977wLN3N4U@cluster0.ifajzmp.mongodb.net/?retryWrites=true&w=majority
-SECRET_KEY = ImIISTian
-DOMAIN_ADDRESS = indoreinstitute.com
-JWT_SECRET_KEY = ImTheSecretKey
