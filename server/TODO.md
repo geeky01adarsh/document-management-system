@@ -16,21 +16,21 @@
 - [x] Create a staff verification middleware
 - [ ] Refresh tokens for student's cookies
 - [ ] Refresh tokens for staff's cookies
-- [ ] Updation of details 
+- [ ] Updation of details -- Go for verification
 
 ### Student's powers
-- [ ] data updation
+- [ ] data updation -- goes to authority for verification 
 - [ ] downloading data
 
 ### Staff's powers
-- [ ] data updation
-- [ ] details of any particular student
+- [ ] data updation -- approval / rejection 
+- [x] details of any particular student
 - [ ] downloading data
 
 ### Uploading files
 - [x] by students
-- [ ] by staffs
-- [ ] mapping files
+- [x] by staffs
+- [x] mapping files
 - [ ] downloading data
 
 ### Documentation

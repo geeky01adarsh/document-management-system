@@ -14,7 +14,7 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 export const StudentSignUp = async (req, res) => {
   try {
-    const { name, email, password, institute } = req.body;
+    const { name, email, password, institute, mobNo } = req.body;
 
     if (!validateEmail(email))
       return res.status(203).json({ err: "Wrong email id provided" });
@@ -39,7 +39,7 @@ export const StudentSignUp = async (req, res) => {
 
     const hashedPass = await bcrypt.hash(password, 10);
 
-    const newStudent = new Student({ name:name, email, password: hashedPass });
+    const newStudent = new Student({ name:name, email, password: hashedPass, mobNo, institute });
     try {
       await newStudent.save();
     } catch (err) {
