@@ -13,7 +13,7 @@ docsRouter.post(
 
 docsRouter.post(
   "/staff/:student_id", 
-  // isAuthenticatedStaff,
+  isAuthenticatedStaff,
   studentDocsUpload
 )
 

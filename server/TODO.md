@@ -5,7 +5,7 @@
 ### initialize database
 - [x] for students
 - [x] for staffs
-- [ ] for students data
+- [x] for requests
 
 ### Authentication related
 - [x] Create a student sign up route
@@ -16,14 +16,15 @@
 - [x] Create a staff verification middleware
 - [ ] Refresh tokens for student's cookies
 - [ ] Refresh tokens for staff's cookies
-- [ ] Updation of details -- Go for verification
+- [x] Updation of details -- Go for verification
 
 ### Student's powers
-- [ ] data updation -- goes to authority for verification 
+- [x] data updation -- goes to authority for verification 
 - [ ] downloading data
 
 ### Staff's powers
-- [ ] data updation -- approval / rejection 
+- [x] data updation -- rejection 
+- [ ] data updation -- acception 
 - [x] details of any particular student
 - [ ] downloading data
 
