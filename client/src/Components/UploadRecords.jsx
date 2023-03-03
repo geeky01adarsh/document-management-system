@@ -1,6 +1,6 @@
 import React from "react";
 
-function AuthorityDashboard() {
+function UploadRecords() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-8">
@@ -25,8 +25,12 @@ function AuthorityDashboard() {
                   name="document-category"
                   className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 >
-                  <option>Transcript</option>
-                  <option>Diploma</option>
+                  <option>Aadhar card</option>
+                  <option>Bank Account Transcript</option>
+                  <option>MarkSheet 12th</option>
+                  <option>MarkSheet 10th</option>
+                  <option>Birth Certificate</option>
+                  <option>Jee Result</option>
                   <option>Other</option>
                 </select>
               </div>
@@ -64,4 +68,4 @@ function AuthorityDashboard() {
   );
 }
 
-export default AuthorityDashboard;
+export default UploadRecords;

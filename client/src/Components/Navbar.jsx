@@ -1,177 +1,78 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
-import { CgMenu, CgCloseR } from "react-icons/cg";
+import logo from "../images/logo.png";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./Login";
 
-const Navbar = () => {
-  const [openMenu, setOpenMenu] = useState(false);
+function Navbar() {
+  const [showMenu, setShowMenu] = useState(false);
 
-  const Nav = styled.nav`
-    .navbar-list {
-      display: flex;
-      gap: 4.8rem;
-
-      li {
-        list-style: none;
-
-        .navbar-link {
-          &:link,
-          &:visited {
-            display: inline-block;
-            text-decoration: none;
-            font-size: 1.8rem;
-            text-transform: uppercase;
-            color: ${({ theme }) => theme.colors.black};
-            transition: color 0.3s linear;
-          }
-
-          &:hover,
-          &:active {
-            color: ${({ theme }) => theme.colors.helper};
-          }
-        }
-      }
-    }
-
-    .mobile-navbar-btn {
-      display: none;
-
-      .close-outline {
-        display: none;
-      }
-    }
-
-    .mobile-navbar-btn[name="close-outline"] {
-      display: none;
-    }
-
-    @media (max-width: ${({ theme }) => theme.media.mobile}) {
-      .mobile-navbar-btn {
-        display: inline-block;
-        z-index: 999;
-        border: ${({ theme }) => theme.colors.black};
-
-        .mobile-nav-icon {
-          font-size: 4.2rem;
-          color: ${({ theme }) => theme.colors.black};
-        }
-      }
-
-      /* hide the original nav menu  */
-      .navbar-list {
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: #fff;
-
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        flex-direction: column;
-        text-align: center;
-
-        transform: translateX(100%);
-
-        visibility: hidden;
-        opacity: 0;
-
-        li {
-          .navbar-link {
-            &:link,
-            &:visited {
-              font-size: 4.2rem;
-            }
-
-            &:hover,
-            &:active {
-              color: ${({ theme }) => theme.colors.helper};
-            }
-          }
-        }
-      }
-
-      .active .mobile-nav-icon {
-        display: none;
-        font-size: 4.2rem;
-        position: absolute;
-        top: 3%;
-        right: 10%;
-        color: ${({ theme }) => theme.colors.black};
-        z-index: 9999;
-      }
-
-      .active .close-outline {
-        display: inline-block;
-      }
-
-      .active .navbar-list {
-        visibility: visible;
-        opacity: 1;
-        transform: translateX(0);
-        z-index: 999;
-      }
-    }
-  `;
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
-    <Nav>
-      <div className={openMenu ? "menuIcon active" : "menuIcon"}>
-        <ul className="navbar-list">
-          <li>
-            <NavLink
-              className="navbar-link"
-              onClick={() => setOpenMenu(false)}
-              to="/"
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className="navbar-link"
-              onClick={() => setOpenMenu(false)}
-              to="/login"
-            >
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className="navbar-link"
-              onClick={() => setOpenMenu(false)}
-              to="/register"
-            >
-              Sign Up
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className="navbar-link"
-              onClick={() => setOpenMenu(false)}
-              to="/contact"
-            >
-              Contact
-            </NavLink>
-          </li>
-        </ul>
-        {/* //nav icon */}
-        <div className="mobile-navbar-btn">
-          <CgMenu
-            name="menu-outline"
-            className="mobile-nav-icon"
-            onClick={() => setOpenMenu(true)}
-          />
-          <CgCloseR
-            name="close-outline"
-            className="close-outline mobile-nav-icon"
-            onClick={() => setOpenMenu(false)}
-          />
+    <>
+      <div className="bg-blue-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center justify-between h-[100px]">
+            <div className="flex-shrink-0">
+              <img className="h-12 w-44" src={logo} alt="Logo" />
+            </div>
+            <div className="hidden md:flex items-center space-x-8 text-2xl text-black-full">
+              <a
+                href="/"
+                className=" hover:text-white px-3 py-2 rounded-md  font-medium"
+              >
+                Home
+              </a>
+              <a
+                href="/login"
+                className=" hover:text-white px-3 py-2 rounded-md  font-medium"
+              >
+                Login
+              </a>
+              <a
+                href="/register"
+                className=" hover:text-white px-3 py-2 rounded-md  font-medium"
+              >
+                Registration
+              </a>
+              <a
+                href="/contact"
+                className=" hover:text-white px-3 py-2 rounded-md  font-medium"
+              >
+                Contact
+              </a>
+            </div>
+            <div className="flex md:hidden">
+              <button
+                className="text-gray-300 hover:text-white focus:outline-none focus:text-white transition duration-150 ease-in-out"
+                onClick={toggleMenu}
+              >
+                <svg
+                  className="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {showMenu ? (
+                    <path d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </nav>
         </div>
       </div>
-    </Nav>
+
+      
+    </>
   );
-};
+}
 
 export default Navbar;

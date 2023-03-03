@@ -6,10 +6,12 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("user");
+  const [number, setnumber] = useState("");
+  const [skey, setskey] = useState("");
+  const [institutename, setinstitutename] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
   };
 
   return (
@@ -67,6 +69,18 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2">
+              Contact Number
+            </label>
+            <input
+              className="border rounded-lg py-2 px-3 w-full"
+              type="number"
+              value={number}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
               Password
             </label>
             <input
@@ -77,6 +91,35 @@ const Register = () => {
               required
             />
           </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Institute Name
+            </label>
+            <input
+              className="border rounded-lg py-2 px-3 w-full"
+              type="text"
+              value={institutename}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+
+          {userType === "faculty" ? (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-2">
+                SecretKey
+              </label>
+              <input
+                className="border rounded-lg py-2 px-3 w-full"
+                type="text"
+                value={skey}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+          ) : (
+            <></>
+          )}
           <div className="flex justify-center">
             <button
               className="flex justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded "
