@@ -54,7 +54,7 @@ import React, { Wrapper } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { FaDiscord, FaInstagram, FaYoutube } from "react-icons/fa";
-import Footer from "./components/Footer";
+import Footer from "./Footer";
 
 function Home() {
   return (
