@@ -18,3 +18,17 @@ export const validatePassword = (pass) => {
 export const validateInstitute = (institute) => {
   return (institute === "IIST" || institute === "IIP" || institute === "IIMR");
 }
+
+
+export const  validateMobileNumber= (mobileNumber) => {
+  // Remove any non-digit characters from the string
+  const cleanedNumber = mobileNumber.replace(/\D/g, '');
+  // Check if the cleaned string is a valid mobile number
+  if (cleanedNumber.length === 10 && ['7', '8', '9'].includes(cleanedNumber[0])) {
+    // If it is, parse it as an integer and return it
+    return parseInt(cleanedNumber, 10);
+  } else {
+    // If it's not a valid mobile number, throw an error or return a default value
+    throw new Error('Invalid mobile number provided');
+  }
+}

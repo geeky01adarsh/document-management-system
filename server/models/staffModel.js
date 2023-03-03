@@ -21,6 +21,10 @@ const staffSchema = new mongoose.Schema({
   department: {
     type: String,
   },
+  mobNo: {
+    type: String,
+    required: true,
+  }
 });
 
 const Staff = mongoose.model("Staff", staffSchema);

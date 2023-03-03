@@ -18,7 +18,7 @@ const DOMAIN_ADDRESS = process.env.DOMAIN_ADDRESS;
 
 export const staffSignUp = async (req, res) => {
   try {
-    const { name, email, password, secretkey, institute } = req.body;
+    const { name, email, password, secretkey, institute, mobNo } = req.body;
     let { department } = req.body;
     if (!validateEmail(email))
       return res
@@ -61,6 +61,7 @@ export const staffSignUp = async (req, res) => {
       password: hashedPass,
       institute,
       department,
+      mobNo
     });
     try {
       await newStaff.save();
