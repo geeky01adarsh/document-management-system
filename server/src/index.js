@@ -18,8 +18,13 @@ const app = express();
 
 // middlewares
 dotenv.config();
-// app.use(cors({ credentials: true}));
+app.use(cors({ credentials: true}));
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 // app.use(bodyParser.json());
 // app.use(multer().any())
 app.use(express.json());

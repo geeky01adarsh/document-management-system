@@ -12,8 +12,8 @@ function ImageSlider({ images, duration = 3000 }) {
   }, [currentImage, duration, images.length]);
 
   return (
-    <div className="bg-blue-100">
-      <div className="relative h-[44rem] m-8 w-[-500px]">
+    <div className="mr-20 ml-20 mt-5 mb-5">
+      <div className="relative h-[30rem] w-[-300px]">
         {images.map((image, index) => (
           <img
             key={index}
