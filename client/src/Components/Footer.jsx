@@ -3,7 +3,7 @@ import logo from "../images/LogoIIST.png";
 
 function Footer() {
   return (
-    <footer className="bg-gray-800 text-gray-400 py-8">
+    <footer className="bg-blue-500 text-black-full py-8">
       <div className="container mx-auto flex flex-wrap justify-between">
         <div className="w-full md:w-1/4 mb-8 md:mb-0">
           <h2 className="text-lg font-bold mb-4">About Us</h2>
