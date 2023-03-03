@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../images/logo.png";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Login";
-import {Link} from 'react-scroll'
+import { Link } from "react-scroll";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);

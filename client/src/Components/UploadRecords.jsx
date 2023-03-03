@@ -2,20 +2,20 @@ import React from "react";
 
 function UploadRecords() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-2xl items-center mt-8 bg-gray-100 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-8">
-        <div className="flex justify-between">
-          <h2 className="text-2xl font-medium text-gray-900">
-            Upload Student Records
+        <div className="flex justify-center">
+          <h2 className="text-3xl font-medium text-black-800">
+            Upload Documents
           </h2>
         </div>
 
         <form className="mt-8 space-y-6">
-          <div className="grid grid-cols-1 gap-y-6">
-            <div>
+          <div className="text-2xl grid grid-cols-1 gap-y-6">
+            <div className="text-black-800">
               <label
                 htmlFor="document-category"
-                className="block text-sm font-medium text-gray-700"
+                className="mb-4 block font-medium "
               >
                 Document Category
               </label>
@@ -39,7 +39,7 @@ function UploadRecords() {
             <div>
               <label
                 htmlFor="document-file"
-                className="block text-sm font-medium text-gray-700"
+                className="mb-4 block text-2xl font-medium"
               >
                 Document File
               </label>
