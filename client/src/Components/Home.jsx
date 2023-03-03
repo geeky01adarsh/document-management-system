@@ -19,7 +19,7 @@ function Home() {
       <Navbar />
       {/* <ImageSlider /> */}
       <div>
-        <ImageSlider images={[image1, image2, image3]} duration={4000} />
+        <ImageSlider images={[image1, image2, image3]} duration={4000}/>
       </div>
       <Contact />
       <Footer />

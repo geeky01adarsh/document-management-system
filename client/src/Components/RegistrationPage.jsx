@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
+import axios from "axios";
+const URL = "http://localhost:5000/";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -10,8 +12,42 @@ const Register = () => {
   const [skey, setskey] = useState("");
   const [institutename, setinstitutename] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    userType !== "faculty"
+      ? await axios
+          .post(`${URL}auth/student/signup`, {
+            name,
+            email,
+            password,
+            institute: institutename,
+            mobNo: number,
+          })
+          .then((response) => {
+            console.log("student data", response.data);
+            return response.data;
+          })
+          .catch((error) => {
+            console.error(error);
+            throw error;
+          })
+      : await axios
+          .post(`${URL}staff/signup`, {
+            name,
+            email,
+            password,
+            institute: institutename,
+            mobNo: number,
+            secretkey: skey,
+          })
+          .then((response) => {
+            console.log("faculty data", response.data);
+            return response.data;
+          })
+          .catch((error) => {
+            console.error(error);
+            throw error;
+          });
   };
 
   return (
@@ -73,9 +109,9 @@ const Register = () => {
             </label>
             <input
               className="border rounded-lg py-2 px-3 w-full"
-              type="number"
+              type="text"
               value={number}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {setnumber(e.target.value)}}
               required
             />
           </div>
@@ -99,7 +135,7 @@ const Register = () => {
               className="border rounded-lg py-2 px-3 w-full"
               type="text"
               value={institutename}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setinstitutename(e.target.value)}
               required
             />
           </div>
@@ -111,9 +147,9 @@ const Register = () => {
               </label>
               <input
                 className="border rounded-lg py-2 px-3 w-full"
-                type="text"
+                type="password"
                 value={skey}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setskey(e.target.value)}
                 required
               />
             </div>

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "../App.css";
+import axios from 'axios'
+
+const URL = "http://localhost:5000/";
 
 const Login = () => {
   const [name, setName] = useState("");
@@ -9,8 +12,29 @@ const Login = () => {
   const [skey, setskey] = useState("");
   const [institutename, setinstitutename] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    userType !== "faculty"
+      ? await axios
+          .post(`${URL}auth/student/signin`, { email, password })
+          .then((response) => {
+            console.log("student data", response.data);
+            return response.data;
+          })
+          .catch((error) => {
+            console.error(error);
+            throw error;
+          })
+      : await axios
+          .post(`${URL}staff/signin`, { email, password })
+          .then((response) => {
+            console.log("faculty data", response.data);
+            return response.data;
+          })
+          .catch((error) => {
+            console.error(error);
+            throw error;
+          });
     // Handle form submission here
   };
 

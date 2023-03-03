@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "../images/logo.png";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Login";
+import {Link} from 'react-scroll'
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -37,12 +38,20 @@ function Navbar() {
               >
                 Registration
               </a>
-              <a
+              {/* <a
                 href="/contact"
                 className=" hover:text-white px-3 py-2 rounded-md  font-medium"
+                // onClick={'#contact'}
+              > */}
+              <Link
+                spy={true}
+                to="contact"
+                className=" hover:text-white px-3 py-2 rounded-md  font-medium"
+                smooth={true}
               >
                 Contact
-              </a>
+              </Link>
+              {/* </a> */}
             </div>
             <div className="flex md:hidden">
               <button
@@ -69,8 +78,6 @@ function Navbar() {
           </nav>
         </div>
       </div>
-
-      
     </>
   );
 }
