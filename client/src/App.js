@@ -1,26 +1,20 @@
-import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
-import Login from "./Components/Login";
-import Role from "./Components/Role";
-import AuthorityDash from "./Components/AuthorityDashboard";
-import RegistrationPage from "./Components/RegistrationPage";
-import StudentDash from "./Components/StudentDashboard";
-import { Routes, Route } from "react-router-dom";
+import Login from "./Login";
+import Contact from "./components/Contact";
+import Home from "./components/Home";
+import RegistrationPage from "./components/RegistrationPage";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import StudentDashboard from "./components/StudentDashboard";
 
-function App() {
+const App = () => {
   return (
     <>
-      {/* <Role/> */}
       {/* <Login /> */}
-      {/* <SignUpStudent /> */}
-      {/* <AuthorityDash /> */}
-      {/* <StudentDash /> */}
-
-      <ChakraProvider>
-        <RegistrationPage />
-      </ChakraProvider>
+      <RegistrationPage />
+      {/* <StudentDashboard /> */}
+      {/* <Home /> */}
     </>
   );
-}
+};
 
 export default App;
