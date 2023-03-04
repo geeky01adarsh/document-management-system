@@ -93,7 +93,14 @@ const StudentDashboard = () => {
         </h1>
         <div className="text-white grid grid-cols-2 gap-4 mb-8">
           <div className="bg-[#2A9D8F] p-4 rounded-lg shadow">
-            <h2 className="text-xl font-bold mb-4 text-center m-4">Results</h2>
+            <h2
+              onClick={() => {
+                history("/dashboard/viewfile");
+              }}
+              className="text-xl font-bold mb-4 text-center m-4"
+            >
+              Results
+            </h2>
             {/* <p className="text-gray-700">Lorem ipsum dolor sit</p> */}
           </div>
           <div className="bg-[#f94449] p-4 rounded-lg shadow">
@@ -116,7 +123,7 @@ const StudentDashboard = () => {
         </div>
       </div>
 
-      <div className="flex justify-center m-8">
+      <div className="flex justify-center mb-10">
         <button
           className="flex justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded "
           type="submit"
