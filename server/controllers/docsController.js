@@ -79,3 +79,6 @@ export const studentDocsUpload = async (req, res) => {
     res.status(500).json({ err: "Document uploading failed" });
   }
 };
+
+
+export const getDocuments

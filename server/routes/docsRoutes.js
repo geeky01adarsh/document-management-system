@@ -17,5 +17,7 @@ docsRouter.post(
   studentDocsUpload
 )
 
+docsRouter.post('/:document_id', )
+
 
 export default docsRouter;
