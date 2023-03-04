@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../App.css";
 import axios from 'axios'
+import { staffData, studentData } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const URL = "http://localhost:5000/";
 
 const Login = () => {
+  const [student, setStudent] = useContext(studentData); 
+  const [staff, setStaff] =useContext(staffData);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("user");
   const [skey, setskey] = useState("");
   const [institutename, setinstitutename] = useState("");
+  const history =useNavigate()
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -18,7 +23,11 @@ const Login = () => {
       ? await axios
           .post(`${URL}auth/student/signin`, { email, password })
           .then((response) => {
+            console.log(student)
             console.log("student data", response.data);
+            setStudent(response.data.user)
+            console.log(student)
+            history('/dashboard')
             return response.data;
           })
           .catch((error) => {
@@ -29,6 +38,8 @@ const Login = () => {
           .post(`${URL}staff/signin`, { email, password })
           .then((response) => {
             console.log("faculty data", response.data);
+            setStaff(response.data.user);
+            history("/authority_dashboard");
             return response.data;
           })
           .catch((error) => {

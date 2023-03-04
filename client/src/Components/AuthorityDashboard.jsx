@@ -1,10 +1,61 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../images/logo.png";
 import Navbar from "../components/Navbar";
 import { Button } from "react-scroll";
-import { staffName } from "../App";
+import { allStudentData, staffData, requestDetail } from "../App";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+const URL = "http://localhost:5000/";
 
 const AuthorityDashboard = () => {
+  const [staff, setStaff] = useContext(staffData);
+  const [allStudent, setAllStudent] = useContext(allStudentData);
+  const [allRequest, setAllRequest] = useContext(requestDetail);
+  // const [allStudent, setAllStudent] = const [state, setstate] = useState(initialState);
+  const history = useNavigate();
+
+  const fetchAllStudents = async (e) => {
+    e.preventDefault();
+    await axios
+      .get(`${URL}staff/allStudents/`)
+      .then((res) => {
+        console.log(res.data);
+        setAllStudent(res.data);
+        console.log(allStudent);
+        history("/allstudents");
+        return res.data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  const fetchAllRequests = async (e) => {
+    e.preventDefault();
+    await axios
+      .get(`${URL}staff/requests/`)
+      .then((res) => {
+        console.log(res.data);
+        setAllRequest(res.data);
+        console.log(allRequest);
+        history("/requests");
+        return res.data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const handleDetails = async (e) => {
+    await fetchAllStudents(e);
+    await fetchAllStudents(e);
+
+    const allStudentDetails = await fetchAllStudents(e);
+    setAllStudent(allStudentDetails);
+    console.log(allStudent);
+    history("/allstudents");
+  };
+
   return (
     <>
       <div className="bg-blue-500">
@@ -13,15 +64,15 @@ const AuthorityDashboard = () => {
             <div className="flex-shrink-0">
               <img className="h-12 w-44" src={logo} alt="Logo" />
             </div>
-            <staffName.Consumer>
-              {(sname) => {
-                return (
-                  <h1 className="hidden md:flex items-center space-x-8 text-2xl font-bold text-black-full">
-                    {sname}
-                  </h1>
-                );
-              }}
-            </staffName.Consumer>
+            {/* <staffData.Consumer> */}
+            {/* {(sname) => {
+                return ( */}
+            <h1 className="hidden md:flex items-center space-x-8 text-2xl font-bold text-black-full">
+              {staff?.name}
+            </h1>
+            {/* ); */}
+            {/* }} */}
+            {/* </staffData.Consumer> */}
           </nav>
         </div>
       </div>
@@ -82,8 +133,18 @@ const AuthorityDashboard = () => {
           <button
             className="flex justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded "
             type="submit"
+            onClick={fetchAllStudents}
           >
             Find Records
+          </button>
+        </div>
+        <div className="flex justify-center m-10">
+          <button
+            className="flex justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded "
+            type="submit"
+            onClick={fetchAllRequests}
+          >
+            Pending Request
           </button>
         </div>
       </div>

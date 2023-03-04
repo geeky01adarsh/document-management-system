@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+const URL = "http://localhost:5000/";
+
 
 function UploadRecords() {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (e) => {
+    e.preventDefault();
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleFileUpload = (e) => {
+    e.preventDefault();
+
+    // create new FormData object and append selected file
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    // send file to backend API endpoint
+    axios
+      .post(`${URL}docs/student/upload`, formData)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="text-2xl items-center mt-8 bg-gray-100 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-8">
@@ -45,8 +68,9 @@ function UploadRecords() {
               </label>
               <div className="mt-1">
                 <input
-                  id="document-file"
-                  name="document-file"
+                  onChange={handleFileChange}
+                  id="file"
+                  name="file"
                   type="file"
                   className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
@@ -58,6 +82,7 @@ function UploadRecords() {
             <button
               type="submit"
               className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              onClick={handleFileUpload}
             >
               Upload
             </button>

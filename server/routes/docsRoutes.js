@@ -6,8 +6,8 @@ import {upload} from "../utils/temp_docs.js";
 const docsRouter = Router();
 
 docsRouter.post(
-  "/student/upload",
-  isAuthenticatedStudent,
+  "/student/upload/:student_id",
+  // isAuthenticatedStudent,
   studentDocsUpload
 );
 

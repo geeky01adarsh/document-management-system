@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useHistory } from "react";
 import "../App.css";
 import logo from "../images/logo.png";
 import StudentImage from "../images/StudentImage.jpeg";
+import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { studentData } from "../App";
+import Logout from "./Logout";
+import RequestPopUp from "./RequestPopUp";
+import Link from "react";
+import UploadRecords from "./UploadRecords";
 
 const StudentDashboard = () => {
+  // const history = useHistory();
+  const history = useNavigate();
+  const [student, setStudent] = useContext(studentData);
+
+  console.log("dashboard", student);
+
   const studentInfo = {
     name: "Adarsh Navneet Sinha",
     studentId: "0818CS201008",
@@ -24,10 +37,26 @@ const StudentDashboard = () => {
             </div>
             <div>
               <div className="hidden md:flex items-center space-x-8 text-2xl  font-bold text-black-full">
-                Adarsh Navneet Sinha
+                {student?.name}
               </div>
               <div className="hidden md:flex items-center space-x-8 text-2xl text-black-full">
                 0818CS201008
+              </div>
+            </div>
+            <div className="flex justify-content space-x-8">
+              <div
+                onClick={() => history("/dashboard/requestmade")}
+                className="hidden md:flex items-center hover:text-white space-x-8 text-2xl  font-bold text-black-full"
+              >
+                {/* <Link onClick={<RequestPopUp />}>Request</Link> */}
+                Request
+              </div>
+              <div
+                onClick={() => history("/dashboard/logout")}
+                className="hidden md:flex items-center hover:text-white space-x-8 text-2xl  font-bold text-black-full"
+              >
+                {/* <Link onClick={<Logout />}>Logout</Link> */}
+                {/* Logout */}
               </div>
             </div>
           </nav>
@@ -40,10 +69,8 @@ const StudentDashboard = () => {
         <div className="flex bg-blue-500 text-white rounded-lg shadow-lg p-8 pt-12 m-10 w-1/2 justify-between">
           <div className="flex flex-col md:flex-row md:justify-between mb-4 space-x-28">
             <div className="mb-4">
-              <p className="font-bold mb-2">Name: {studentInfo.name}</p>
-              <p className="font-bold mb-2">
-                Student ID: {studentInfo.studentId}
-              </p>
+              <p className="font-bold mb-2">Name: {student?.name}</p>
+              <p className="font-bold mb-2">Student ID: {student?._id}</p>
               <p className="font-bold mb-2">Major: {studentInfo.major}</p>
             </div>
             <div className="mb-4">
@@ -85,9 +112,20 @@ const StudentDashboard = () => {
             </h2>
             {/* <p className="text-gray-700">Lorem ipsum dolor</p> */}
           </div>
+          {/* {student?.documents} */}
         </div>
       </div>
-      {/* Dashboard - End */}
+
+      <div className="flex justify-center m-8">
+        <button
+          className="flex justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded "
+          type="submit"
+          // onClick={UploadRecords}
+          onClick={() => history("/dashboard/uploadrecords")}
+        >
+          Upload Records
+        </button>
+      </div>
     </>
   );
 };

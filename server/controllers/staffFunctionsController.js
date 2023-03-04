@@ -102,7 +102,7 @@ export const staffLogin = async (req, res) => {
     if (!validatePassword(password))
       return res
         .status(203)
-        .json({ err: "Please provide name in exprected format" });
+        .json({ err: "Please provide password in exprected format" });
 
     const passMatch = await bcrypt.compare(password, existingUser.password);
 

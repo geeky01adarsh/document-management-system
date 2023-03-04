@@ -23,7 +23,7 @@ studentAuthRouter.get(
 );
 studentAuthRouter.post(
   "/update/:student_id",
-    isAuthenticatedStudent,
+  isAuthenticatedStudent,
   studentReq
 );
 

@@ -4,13 +4,17 @@ import { acceptUser, getAllRequests, getThisReq, rejectReq, studentReq } from ".
 import { getAllStudents, staffLogin, staffSignout, staffSignUp } from "../controllers/staffFunctionsController.js";
 const staffRouter = Router();
 
-staffRouter.get('/allStudents', isAuthenticatedStaff, getAllStudents)
+staffRouter.get('/allStudents',
+//  isAuthenticatedStaff,
+  getAllStudents)
 staffRouter.post('/signup', staffSignUp)
 staffRouter.post('/signin', staffLogin)
 staffRouter.get('/signout', staffSignout)
-staffRouter.get('/student/:student_id', isAuthenticatedStaff, getStudentDetails)
+staffRouter.get('/student/:student_id', 
+// isAuthenticatedStaff, 
+getStudentDetails)
 staffRouter.get('/requests',
-    isAuthenticatedStaff,
+    // isAuthenticatedStaff,
     getAllRequests
 )
 staffRouter.get(
