@@ -4,14 +4,14 @@ import { requestDetail, studentData } from "../App";
 
 function RequestQueue() {
   const [request, setRequest] = useContext(requestDetail);
-  const [student, setStudent] = useContext(studentData); 
+  const [student, setStudent] = useContext(studentData);
 
   console.log(request);
   return (
-    <div className="text-2xl bg-red-500 p-8 grid place-items-center overflow-x-auto align-middle">
+    <div className="text-2xl p-8 grid place-items-center overflow-x-auto align-middle">
       <table className="table-auto border-collapse border border-gray-500">
         <thead>
-          <tr className="text-3xl bg-blue-500">
+          <tr className="text-3xl bg-blue-500 border border-gray-500">
             {/* <th className="font-medium px-4 py-2">S.no.</th> */}
             <th className="font-medium px-4 py-2">RequestName</th>
             <th className="font-medium px-4 py-2">Student_Id</th>
