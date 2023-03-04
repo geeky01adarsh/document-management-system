@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const URL = "http://localhost:5000/";
 
 const Register = () => {
@@ -12,6 +13,7 @@ const Register = () => {
   const [skey, setskey] = useState("");
   const [institutename, setinstitutename] = useState("");
 
+  const history = useNavigate();
   const handleSubmit = async(e) => {
     e.preventDefault();
     userType !== "faculty"
@@ -48,6 +50,9 @@ const Register = () => {
             console.error(error);
             throw error;
           });
+
+          history('/login')
+
   };
 
   return (

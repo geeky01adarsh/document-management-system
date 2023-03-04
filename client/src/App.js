@@ -21,6 +21,7 @@ export const staffData = createContext();
 export const studentData = createContext();
 export const allStudentData = createContext();
 export const requestDetail = createContext();
+export const student_id_details = createContext();
 
 const App = () => {
   // const students = [
@@ -47,7 +48,7 @@ const App = () => {
   const [student, setStudent] = useState();
   const [allStudent, setAllStudent] = useState([]);
   const [request, setRequest] = useState([]);
-  
+  const [student_id, setStudent_id] = useState();
 
   return (
     <>
@@ -55,6 +56,7 @@ const App = () => {
       {/* <AuthorityDashboard /> */}
       {/* <UploadRecord /> */}
       {/* <RequestPopUp /> */}
+      <student_id_details.Provider value={[student_id, setStudent_id]}>
       <staffData.Provider value={[staff, setStaff]}>
         <studentData.Provider value={[student, setStudent]}>
           <allStudentData.Provider value={[allStudent, setAllStudent]}>
@@ -86,6 +88,7 @@ const App = () => {
           </allStudentData.Provider>
         </studentData.Provider>
       </staffData.Provider>
+      </student_id_details.Provider>
 
       {/* <ViewPdf /> */}
 

@@ -27,12 +27,12 @@ export const studentDocsUpload = async (req, res) => {
         console.error(err);
         return res.status(400).send(err);
       } else {
-        const { fileName } = req.body;
-        if (!fileName) {
-          return res.status(403).json({ err: "Please provide a file name" });
-        }
+        // const { fileName } = req.body;
+        // if (!fileName) {
+        //   return res.status(403).json({ err: "Please provide a file name" });
+        // }
         let documentDetails = {
-          fileName,
+          // fileName,
           student_id,
           content: req.file.path,
         };
@@ -44,7 +44,7 @@ export const studentDocsUpload = async (req, res) => {
               documents: [
                 ...StudentDetails.documents,
                 {
-                  name: fileName,
+                  // name: fileName,
                   path: req.file.path,
                 },
               ],

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { allStudentData, studentData } from "../App";
+import { allStudentData, studentData, student_id_details } from "../App";
 import axios from "axios";
 
 const URL = "http://localhost:5000/";
@@ -9,22 +9,24 @@ function StudentRecord() {
   const history = useNavigate();
   const [allStudent, setAllStudent] = useContext(allStudentData);
   const [student, setStudent] = useContext(studentData);
-  const [student_id, setStudent_id] = useState();
+  // const [student_id, setStudent_id] = useState();
+  const [student_id, setStudent_id] = useContext(student_id_details)
 
   console.log(allStudent);
 
-  const handleStudent = async (e, student_id) => {
+  const handleStudent = async (e, _student__id) => {
     // console.log("hi");
     e.preventDefault();
     // const student_id = e.target.value;
-    console.log(student_id);
+    console.log(_student__id);
+    setStudent_id(_student__id)
     await axios
-      .get(`${URL}staff/student/${student_id}`)
+      .get(`${URL}staff/student/${_student__id}`)
       .then((response) => {
-        console.log(student);
-        console.log("student data", response.data);
+        // console.log(student);
+        // console.log("student data", response.data);
         setStudent(response.data.StudentDetails);
-        console.log(student);
+        // console.log(student);
         history("/dashboard");
         return response.data;
       })

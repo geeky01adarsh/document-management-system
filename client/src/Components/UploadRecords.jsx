@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { student_id_details } from "../App";
 const URL = "http://localhost:5000/";
 
 
 function UploadRecords() {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [student_id, setStudent_id] = useState();
 
+  // console.log(student_id)
   const handleFileChange = (e) => {
     e.preventDefault();
     setSelectedFile(e.target.files[0]);
@@ -14,13 +17,14 @@ function UploadRecords() {
   const handleFileUpload = (e) => {
     e.preventDefault();
 
+    console.log(student_id)
     // create new FormData object and append selected file
     const formData = new FormData();
     formData.append("file", selectedFile);
 
     // send file to backend API endpoint
     axios
-      .post(`${URL}docs/student/upload`, formData)
+      .post(`${URL}docs/student/upload/${student_id}`, formData)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
@@ -59,6 +63,13 @@ function UploadRecords() {
               </div>
             </div>
 
+            <div className="mb-4 block text-2xl font-medium">
+              <input
+                value={student_id}
+                onChange={(e) => setStudent_id(e.target.value)}
+              />
+            </div>
+
             <div>
               <label
                 htmlFor="document-file"
@@ -66,6 +77,7 @@ function UploadRecords() {
               >
                 Document File
               </label>
+
               <div className="mt-1">
                 <input
                   onChange={handleFileChange}
