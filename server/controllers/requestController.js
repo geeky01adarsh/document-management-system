@@ -27,7 +27,7 @@ export const studentReq = async (req, res) => {
         console.error(err);
         return res.status(400).send(err);
       } else {
-        const { fileName } = req.body;
+        const { fileName, fileValue } = req.body;
         if (!fileName) {
           return res.status(403).json({ err: "Please provide a file name" });
         }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { studentDocsUpload } from "../controllers/docsController.js";
+import { sendFileFrontend, studentDocsUpload } from "../controllers/docsController.js";
 import { isAuthenticatedStaff, isAuthenticatedStudent } from "../controllers/middlewareControllers.js";
 import {upload} from "../utils/temp_docs.js";
 
@@ -17,5 +17,9 @@ docsRouter.post(
   studentDocsUpload
 )
 
+docsRouter.post(
+  "/:object_id",
+  sendFileFrontend
+ )
 
 export default docsRouter;
