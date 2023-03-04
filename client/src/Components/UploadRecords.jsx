@@ -64,6 +64,9 @@ function UploadRecords() {
             </div>
 
             <div className="mb-4 block text-2xl font-medium">
+              <h2 className="text-2xl font-medium text-black-800 mb-4 block">
+                Student ID
+              </h2>
               <input
                 value={student_id}
                 onChange={(e) => setStudent_id(e.target.value)}

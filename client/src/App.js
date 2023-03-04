@@ -57,40 +57,39 @@ const App = () => {
       {/* <UploadRecord /> */}
       {/* <RequestPopUp /> */}
       <student_id_details.Provider value={[student_id, setStudent_id]}>
-      <staffData.Provider value={[staff, setStaff]}>
-        <studentData.Provider value={[student, setStudent]}>
-          <allStudentData.Provider value={[allStudent, setAllStudent]}>
-            <requestDetail.Provider value={[request, setRequest]}>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<RegistrationPage />} />
-                  <Route path="/dashboard" element={<StudentDashboard />} />
-                  <Route
-                    path="/authority_dashboard"
-                    element={<AuthorityDashboard />}
-                  />
-                  <Route path="/allstudents" element={<StudentRecord />} />
-                  <Route path="/requests" element={<RequestQueue />} />
-                  <Route
-                    path="/dashboard/uploadrecords"
-                    element={<UploadRecords />}
-                  />
-                  <Route
-                    path="/dashboard/requestmade"
-                    element={<RequestPopUp />}
-                  />
-                  <Route path="/dashboard/logout" element={<Logout />} />
-                </Routes>
-              </BrowserRouter>
-            </requestDetail.Provider>
-          </allStudentData.Provider>
-        </studentData.Provider>
-      </staffData.Provider>
+        <staffData.Provider value={[staff, setStaff]}>
+          <studentData.Provider value={[student, setStudent]}>
+            <allStudentData.Provider value={[allStudent, setAllStudent]}>
+              <requestDetail.Provider value={[request, setRequest]}>
+                <BrowserRouter>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<RegistrationPage />} />
+                    <Route path="/dashboard" element={<StudentDashboard />} />
+                    <Route
+                      path="/authority_dashboard"
+                      element={<AuthorityDashboard />}
+                    />
+                    <Route path="/allstudents" element={<StudentRecord />} />
+                    <Route path="/requests" element={<RequestQueue />} />
+                    <Route
+                      path="/dashboard/uploadrecords"
+                      element={<UploadRecords />}
+                    />
+                    <Route
+                      path="/dashboard/requestmade"
+                      element={<RequestPopUp />}
+                    />
+                    <Route path="/dashboard/logout" element={<Logout />} />
+                    <Route path="/dashboard/viewfile" element={<ViewPdf />} />
+                  </Routes>
+                </BrowserRouter>
+              </requestDetail.Provider>
+            </allStudentData.Provider>
+          </studentData.Provider>
+        </staffData.Provider>
       </student_id_details.Provider>
-
-      {/* <ViewPdf /> */}
 
       {/* **************COntext APIs ***************************************** */}
       {/* Context API For Staff Dashboard  */}
