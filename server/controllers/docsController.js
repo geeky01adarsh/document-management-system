@@ -79,3 +79,35 @@ export const studentDocsUpload = async (req, res) => {
     res.status(500).json({ err: "Document uploading failed" });
   }
 };
+
+
+export const sendFileFrontend = async (req, res) => {
+  try {
+    const  {student_id  }= req.body;
+    // console.log(req.body)
+    const object_id = req.params.object_id;
+    console.log(student_id)
+    let StudentDetails;
+    try {
+      StudentDetails = await Student.findById(student_id);
+    } catch (error) {
+      console.error("Error while fetching student details", error);
+      return res.status(500).json({ err: "Internal server error" });
+    }
+
+    if (!StudentDetails) {
+      return res.status(404).json({ err: "No such student found" });
+    }
+
+    const path = await StudentDetails.documents.filter(function (document) {
+      return document._id === object_id;
+    });
+
+    res.sendFile(path); 
+    return res.status(200).json({msg:"data sent to frontend"})
+    
+  } catch (error) {
+    
+  }
+
+}
