@@ -81,4 +81,4 @@ export const studentDocsUpload = async (req, res) => {
 };
 
 
-export const getDocuments
+// export const getDocuments
